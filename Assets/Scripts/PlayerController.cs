@@ -1,15 +1,17 @@
-
-using JetBrains.Annotations;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    public float fuel;
+
+    public float maxFuel = 100;
+    
+    [SerializeField]
+    private float fuelBurningRate = .8f;
+
     public float speed;
     public float jumpPower;
     public float rotationSensitivity;
@@ -22,14 +24,12 @@ public class PlayerController : MonoBehaviour
     Vector3 offSet;
     Vector3 force;
 
-    Rigidbody rb;
-    
-
+    public Rigidbody rb;
+   
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       
         force = (Vector3.up * jumpPower * Time.deltaTime * 33.0f);
     }
 
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                rb.AddForce(force, ForceMode.Force);      
+                rb.AddForce(force, ForceMode.Force); 
             }
 
             //Horizontal rotation of character
@@ -72,14 +72,36 @@ public class PlayerController : MonoBehaviour
             CurrentCameraRotation -= verticalRotation;
             CurrentCameraRotation = Mathf.Clamp(CurrentCameraRotation, -85, 85);
             UpperBody.transform.localEulerAngles = new Vector3(CurrentCameraRotation, 0.0f, 0.0f);
+            
+            PlayerFuelBar.btSlider.value = fuel;
         }  
     }
 
     private void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Space)) 
+        if (Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            fuel -= fuelBurningRate * Time.deltaTime;
+            if(fuel <= 0.0f)
+            {
+                Explode();
+            }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Collectible")
+        {
+            fuel += 25.0f;
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void Explode()
+    {
+        Debug.Log(" No fuel ");
+        jumpPower = 0.0f;
     }
 }
