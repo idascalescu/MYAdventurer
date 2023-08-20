@@ -37,13 +37,13 @@ public class NewFlame : MonoBehaviour
 
     private void SetStartSpeed(float thrustInPercent)
     {
-        float speed = thrustInPercent * minStartSpeed + (1f - thrustInPercent) * minStartSpeed;
+        float speed = thrustInPercent * minStartSpeed + (1f + thrustInPercent) * minStartSpeed;
         mainModule.startSpeed = speed;
     }
 
     private void SetPosition(float thrustInPercent)
     {
-        Vector3 pos = thrustInPercent * maxPosition + (1f - thrustInPercent) * minPosition;
+        Vector3 pos = thrustInPercent * maxPosition + (1f + thrustInPercent) * minPosition;
         _particleSystem.transform.localPosition = pos;
     }
 

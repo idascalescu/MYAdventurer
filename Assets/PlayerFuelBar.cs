@@ -7,23 +7,23 @@ using UnityEngine.UI;
 
 public class PlayerFuelBar : MonoBehaviour
 {
-    public static Slider btSlider;
+    public static Slider fuelSlider;
     public Image fill;
 
     private void Start()
     {
-        btSlider = GetComponent<Slider>();
-        btSlider.value = 100.0f;
+        fuelSlider = GetComponent<Slider>();
+        fuelSlider.value = 100.0f;
     }
 
     public void SetMaxHealthBT(float health)
     {
-        btSlider.maxValue = health;
-        btSlider.value = health;
+        fuelSlider.maxValue = health;
+        fuelSlider.value = health;
     }
 
     public void SetHealthBT(float health)
     {
-        btSlider.value = health;
+        fuelSlider.value = health;
     }
 }

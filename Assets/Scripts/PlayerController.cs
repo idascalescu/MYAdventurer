@@ -7,10 +7,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public float fuel;
 
-    public float maxFuel = 100;
+    public float maxFuel = 300;
     
     [SerializeField]
-    private float fuelBurningRate = .8f;
+    private float fuelBurningRate = 1.8f;
 
     public float speed;
     public float jumpPower;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             CurrentCameraRotation = Mathf.Clamp(CurrentCameraRotation, -85, 85);
             UpperBody.transform.localEulerAngles = new Vector3(CurrentCameraRotation, 0.0f, 0.0f);
             
-            PlayerFuelBar.btSlider.value = fuel;
+            PlayerFuelBar.fuelSlider.value = fuel;
         }  
     }
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Collectible")
         {
-            fuel += 25.0f;
+            fuel += 50.0f;
             Destroy(collision.gameObject);
         }
     }
