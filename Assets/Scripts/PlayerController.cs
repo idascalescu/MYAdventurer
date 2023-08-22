@@ -6,8 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     public float fuel;
+    [SerializeField]
+    public float health;
 
     public float maxFuel = 300;
+    public float maxHP = 100;
     
     [SerializeField]
     private float fuelBurningRate = 1.8f;
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = 50;
         rb = GetComponent<Rigidbody>();
         force = (Vector3.up * jumpPower * Time.deltaTime * 33.0f);
     }
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
             UpperBody.transform.localEulerAngles = new Vector3(CurrentCameraRotation, 0.0f, 0.0f);
             
             PlayerFuelBar.fuelSlider.value = fuel;
+            PlayerHealthPointsBar.healthPointsSlider.value = health;
         }  
     }
 
@@ -97,11 +102,22 @@ public class PlayerController : MonoBehaviour
             fuel += 50.0f;
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "Drone1")
+        {
+            health -= 10;
+        }
+        if (collision.gameObject.tag == "HP")
+        {
+            health += 30;
+            Destroy(collision.gameObject);
+        }
     }
 
     private void Explode()
     {
         Debug.Log(" No fuel ");
         jumpPower = 0.0f;
+        //Play destroy animation
+        //Respawn back to checkpoint
     }
 }

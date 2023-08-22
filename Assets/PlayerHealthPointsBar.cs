@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthPointsBar : MonoBehaviour
 {
+    [SerializeField]
     public static Slider healthPointsSlider;
     public Image fill;
 
@@ -16,13 +17,13 @@ public class PlayerHealthPointsBar : MonoBehaviour
         healthPointsSlider.value = 100.0f;
     }
 
-    public void SetMaxHealthBT(float health)
+    public void SetMaxHealthPlayer(float health)
     {
         healthPointsSlider.maxValue = health;
         healthPointsSlider.value = health;
     }
 
-    public void SetHealthBT(float health)
+    public void SetHealthPlayer(float health)
     {
         healthPointsSlider.value = health;
     }
