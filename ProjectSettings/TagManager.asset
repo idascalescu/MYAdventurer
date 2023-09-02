@@ -7,6 +7,7 @@ TagManager:
   - Collectible
   - Water
   - HP
+  - Torpedo
   layers:
   - Default
   - TransparentFX

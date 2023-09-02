@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public float health;
 
-    public float maxFuel = 300;
+    public float maxFuel = 5000;
     public float maxHP = 100;
     
     [SerializeField]
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float jumpPower;
-    public float rotationSensitivity;
+    public float rotationSensitivity; 
    
     public GameObject FPSCamera;
     public GameObject UpperBody;
