@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    public abstract class Tree : UnityEngine.MonoBehaviour
+    public abstract class Tree : MonoBehaviour
     {
         public BTNode root = null;
 
-        protected void Start()
+        protected void Awake()
         {
             root = SetupTree();
         }

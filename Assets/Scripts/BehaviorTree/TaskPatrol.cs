@@ -12,7 +12,7 @@ public class TaskPatrol : BTNode
 
     private int _currentWaypointIndex = 0;
 
-    private float _waitTime = 1.0f;
+    private float _waitTime = 1.2f;
     private float _waitCounter = 0.0f;
     private bool _waiting = false;
 
@@ -34,7 +34,7 @@ public class TaskPatrol : BTNode
         {
             Transform wp = _waypoints[_currentWaypointIndex];
             if (Vector3.Distance(_transform.position,
-                wp.position) < 0.8f)
+                wp.position) < 0.01f)
             {
                 _transform.position = wp.position;
                 _waitCounter = 0.0f;
@@ -48,10 +48,11 @@ public class TaskPatrol : BTNode
                 _transform.position = Vector3.MoveTowards
                     (_transform.position, wp.position,
                     ABehaviorTree.speed * Time.deltaTime);
+                _transform.LookAt(wp.position);
             }
         }
 
-        state = NodeState.WALKING;//One of the leaves
+        state = NodeState.FLYING;//One of the leaves
         return state;
     }
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace BehaviorTree
 {
-    public class ASelector : BTNode
+    public class Sequence : BTNode
     {
-        public ASelector() : base() { }
-        public ASelector(List<BTNode> children) : base(children) { }
+        public Sequence() : base() { }
+        public Sequence(List<BTNode> children) : base(children) { }
         public override NodeState Evaluate()
         {
             bool anyChildIsRunning = false;
@@ -20,16 +20,26 @@ namespace BehaviorTree
                         return state;
                     case NodeState.SUCCESS:
                         continue;
-                    case NodeState.WALKING:
+                    case NodeState.FLYING:
                         anyChildIsRunning = true;
                         continue;
                     default:
                         state = NodeState.SUCCESS;
-                        return state;
+                        return state; //For this is what I've done wrong probably
+                        /* case NodeState.FAILURE:
+                             continue;
+                         case NodeState.FLYING:
+                             state = NodeState.FLYING;
+                             return state;
+                         case NodeState.SUCCESS:  
+                             state = NodeState.SUCCESS;
+                             return state;
+                         default:
+                             continue;*/
                 }
             }
 
-            state = anyChildIsRunning ? NodeState.WALKING : NodeState.FAILURE;
+            state = anyChildIsRunning ? NodeState.FLYING : NodeState.SUCCESS;
             return state;
         }
     }

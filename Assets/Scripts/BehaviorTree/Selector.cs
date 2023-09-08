@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    public class sSelector : BTNode//The selector is sorting the "Leaves"
+    public class Selector : BTNode//The selector is sorting the "Leaves"
                                     //the "Leaves" are the actions made by the NPC
     {
-        public sSelector() : base() { }
-        public sSelector(List<BTNode> children) : base(children) { }
+        public Selector() : base() { }
+        public Selector(List<BTNode> children) : base(children) { }
 
         public override NodeState Evaluate()
         {
@@ -19,8 +19,10 @@ namespace BehaviorTree
                     case NodeState.FAILURE:
                         continue;
                     case NodeState.SUCCESS:
+                        state = NodeState.SUCCESS;
                         return state;
-                    case NodeState.WALKING:
+                    case NodeState.FLYING:
+                        state = NodeState.FLYING;
                         return state;
                     default:
                         continue;

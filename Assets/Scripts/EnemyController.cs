@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         healtPoints = maxHealth;
-        
     }
 
     void Update()

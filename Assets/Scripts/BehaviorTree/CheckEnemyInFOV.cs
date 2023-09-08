@@ -1,33 +1,29 @@
+using BehaviorTree;
 using System.Collections;
 using System.Collections.Generic;
-using BehaviorTree;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class CheckWaypoints : BTNode//Part of behaviour tree system
+public class CheckEnemyInFOV : BTNode
 {
     private static int _enemyLayerMask = 1 << 6;
-
     private Transform _transform;
 
-    public CheckWaypoints(Transform transform)
+    public CheckEnemyInFOV(Transform transform)
     {
         _transform = transform;
     }
 
     public override NodeState Evaluate()
     {
-        object t = GetData("Player");
-        if (t == null)
+        object obj = GetData("target");
+        if (obj != null)
         {
-            Collider[] _colliders = Physics.OverlapSphere(
-                _transform.position,
-                ABehaviorTree.fovRange,
-                _enemyLayerMask);
-
-            if (_colliders.Length > 0)
+            Collider[] colliders = Physics.OverlapSphere(
+                _transform.position, ABehaviorTree.fovRange, _enemyLayerMask);
+            if (colliders.Length > 0)
             {
-                parent.parent.SetData("Player",
-                    _colliders[0].transform);
+                parent.parent.SetData("Player", colliders[0].transform);
                 state = NodeState.SUCCESS;
                 return state;
             }

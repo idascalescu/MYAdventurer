@@ -12,7 +12,7 @@ public class TorpedoHB : MonoBehaviour
     private void Start()
     {
         torpedoHP = GetComponent<Slider>();
-        torpedoHP.value = 30.0f;
+        torpedoHP.value = 300.0f;
     }
 
     public void SetMaxHealthTorpedo(float health)

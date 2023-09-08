@@ -6,12 +6,12 @@ namespace BehaviorTree
 {
     public enum NodeState
     {
-        WALKING,
+        FLYING,
         SUCCESS,
         FAILURE
     };
 
-    public class BTNode : MonoBehaviour
+    public class BTNode 
     {
         protected NodeState state;
 
@@ -41,37 +41,40 @@ namespace BehaviorTree
 
         public virtual NodeState Evaluate() => NodeState.FAILURE;
         
-        public void SetData(string fly, object value)
+        public void SetData(string key, object value)
         {
-            _dataContext[fly] = value;
+            _dataContext[key] = value;
         }
 
-        public object GetData(string fly) 
+        public object GetData(string key) 
         {
             object value = null;
-            if(_dataContext.TryGetValue(fly, out value))
+            if(_dataContext.TryGetValue(key, out value))
                 return value;
 
             BTNode node = parent;
             while (node != null)
             {
-                value = node.GetData(fly);
+                value = node.GetData(key);
                 if(value != null)
                     return value;
                 node = node.parent;
             }
-            return value;
+            return null;
         }
 
-        public bool ClearData(string fly)
+        public bool ClearData(string key)
         {
-            if (_dataContext.ContainsKey(fly))
+            if (_dataContext.ContainsKey(key))
+            {
+                _dataContext.Remove(key);
                 return true;
-
+            }
+             
             BTNode node = parent;
             while(node != null)
             {
-                bool clearead = node.ClearData(fly);
+                bool clearead = node.ClearData(key);
                 if(clearead)
                     return true;
                 node = node.parent;

@@ -4,11 +4,28 @@ using UnityEngine;
 
 public class SpawnTorpeedos : MonoBehaviour
 {
+    public Vector3 minPos;
+    public Vector3 maxPos;
+
     public GameObject prefab;
 
-    Vector3 vector = new Vector3 (0, 0, 0); 
+    Vector3 vector;
+
+    private void Awake()
+    {
+        Vector3 randomPos = new Vector3(
+        Random.Range(minPos.x, maxPos.x),
+        Random.Range(minPos.y, maxPos.y),
+        Random.Range(minPos.z, maxPos.z));
+
+        transform.position = randomPos;
+    }
+
     void Start()
     {
-        Instantiate(prefab, vector, Quaternion.identity);
+        for(int i = 0; i < 1; i++) 
+        {
+            Instantiate(prefab, vector, Quaternion.identity);
+        }   
     }
 }
