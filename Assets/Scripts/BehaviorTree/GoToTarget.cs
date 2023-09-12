@@ -22,14 +22,14 @@ public class GoToTarget : BTNode
             _transform.position, target.position,
             ABehaviorTree.speed + Time.deltaTime);
             _transform.LookAt(target.position);*/ // After gitUp
-        Transform target = (Transform)GetData("Player");
 
-
+        Transform target = (Transform)GetData("target");
         if (Vector3.Distance(_transform.position, target.position) > 0.01f)
         {
             _transform.position = Vector3.MoveTowards(
                 _transform.position, target.position, ABehaviorTree.speed * Time.deltaTime);
-            _transform.LookAt(target.position); 
+            _transform.LookAt(target.position);
+            Debug.Log("target on VoF");
         }
 
         state = NodeState.FLYING; return state;

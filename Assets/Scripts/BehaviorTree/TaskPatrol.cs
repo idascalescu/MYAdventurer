@@ -12,7 +12,7 @@ public class TaskPatrol : BTNode
 
     private int _currentWaypointIndex = 0;
 
-    private float _waitTime = 1.2f;
+    private float _waitTime = 1.0f;
     private float _waitCounter = 0.0f;
     private bool _waiting = false;
 
@@ -51,7 +51,7 @@ public class TaskPatrol : BTNode
                 _transform.LookAt(wp.position);
             }
         }
-
+        
         state = NodeState.FLYING;//One of the leaves
         return state;
     }

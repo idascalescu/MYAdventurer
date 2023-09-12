@@ -20,10 +20,10 @@ public class CheckEnemyInFOV : BTNode
         if (obj != null)
         {
             Collider[] colliders = Physics.OverlapSphere(
-                _transform.position, ABehaviorTree.fovRange, _enemyLayerMask);
+            _transform.position, ABehaviorTree.fovRange, _enemyLayerMask);
             if (colliders.Length > 0)
             {
-                parent.parent.SetData("Player", colliders[0].transform);
+                parent.parent.SetData("target", colliders[0].transform);
                 state = NodeState.SUCCESS;
                 return state;
             }

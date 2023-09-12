@@ -4,7 +4,7 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TorpedoHB : MonoBehaviour
+public class LevelOneBossHealthBar : MonoBehaviour
 { 
     public static Slider torpedoHP;
     public Image fill;
