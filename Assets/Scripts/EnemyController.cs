@@ -8,8 +8,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private int mSpeed;
 
-    bool lookAt = false;
-
     public int speed;
     public float healtPoints;
     public float maxHealth;
@@ -19,29 +17,22 @@ public class EnemyController : MonoBehaviour
     [HideInInspector]
     public LevelOneBossHealthBar torpedoHB;
 
+    
+
     void Start()
     {
         healtPoints = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
-        rBody = player.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         LevelOneBossHealthBar.torpedoHP.value = healtPoints;
-
-        if(FollowPlayer.found) 
+        if(FollowPlayer.found == true)
         {
-            lookAt = true;
-        } 
-        if(lookAt)
-        {
-            transform.LookAt(player.transform);
-            Vector3 vel = rBody.velocity;
-            if(!FollowPlayer.found && vel.x > -2 && vel.y< 2 && vel.z < 2)
-            {
-                rBody.AddForce(speed * Time.deltaTime * transform.forward);
-            }
+            transform.position = Vector3.MoveTowards(
+                transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.LookAt(player.transform.position);
         }
     }
 

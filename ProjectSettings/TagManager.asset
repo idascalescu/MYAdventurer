@@ -8,6 +8,7 @@ TagManager:
   - Water
   - HP
   - Torpedo
+  - target
   layers:
   - Default
   - TransparentFX

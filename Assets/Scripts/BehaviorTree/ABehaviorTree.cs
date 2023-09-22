@@ -8,7 +8,7 @@ public class ABehaviorTree : Tree
 {
     public UnityEngine.Transform [] aWaypoints;
 
-    public static float speed = 2.0f;
+    public static float speed = 6.0f;
     public static float fovRange = 6.0f;
     public static float attackRange = 1.0f;
 
@@ -28,8 +28,8 @@ public class ABehaviorTree : Tree
         {
             new Selector (new List<BTNode>
             {
-                /*new CheckEnemyInFOV(transform),
-                new GoToTarget(transform),*/
+                /*new CheckEnemyInFOV(transform),*/
+                /*new GoToTarget(transform),*/
                 new TaskPatrol(transform, aWaypoints),
             }),
 

@@ -11,13 +11,11 @@ public class FollowPlayer : MonoBehaviour
         if(obj.gameObject.tag == "Player")
         {
             found = true;
-            ABehaviorTree.speed = 0.0f;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         found = false;
-        ABehaviorTree.speed = 2.0f;
     }
 }

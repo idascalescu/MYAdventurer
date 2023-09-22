@@ -29,11 +29,11 @@ namespace BehaviorTree
         {
             foreach(BTNode child in children)
             {
-                Attach(child);
+                _Attach(child);
             }
         }
 
-        public void Attach(BTNode node)
+        public void _Attach(BTNode node)
         {
             node.parent = this;
             children.Add(node);

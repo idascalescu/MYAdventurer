@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using BehaviorTree;
 
 public class GoToTarget : BTNode
@@ -32,6 +33,8 @@ public class GoToTarget : BTNode
             Debug.Log("target on VoF");
         }
 
-        state = NodeState.FLYING; return state;
+        state = NodeState.FLYING;
+        return state;
+
     }
 }
