@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public float health;
 
-    public float maxFuel = 5000;
+    public float maxFuel = 100;
     public float maxHP = 100;
     
     [SerializeField]
